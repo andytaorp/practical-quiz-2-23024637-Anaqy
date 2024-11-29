@@ -1,8 +1,27 @@
 import React from "react";
 
-/**
- * TODO: implement the Task component
- * @function Task
- * @returns {React.Component} A <li> containing the task description and a checkbox to toggle completion
- */
-export default function Task() {}
+function Task({ task, onToggleTask, onDeleteTask }) {
+  return (
+    <li>
+      <label>
+        <input
+          type="checkbox"
+          checked={task.completed}
+          onChange={() => onToggleTask(task.id)}
+        />
+        <span
+          style={{
+            textDecoration: task.completed ? "line-through" : "none",
+            cursor: "pointer",
+          }}
+        >
+          {task.text}
+        </span>
+      </label>
+      <button onClick={() => onDeleteTask(task.id)}>Delete</button>
+    </li>
+  );
+}
+
+export default Task;
+
