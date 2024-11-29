@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 
-export default function Form({ onAddTask }) {
-  const [description, setDescription] = useState("");
+function Form({ onAddTask }) {
+  const [input, setInput] = useState("");
 
   const handleSubmit = (e) => {
-    // TODO: write code to handle form submission
+    e.preventDefault();
+    if (input.trim()) {
+      onAddTask(input.trim());
+      setInput("");
+    }
   };
 
-  return {
-    /*TODO: add a form to add a new task*/
-  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Enter a new task"
+      />
+      <button type="submit">Add Task</button>
+    </form>
+  );
 }
+
+export default Form;
